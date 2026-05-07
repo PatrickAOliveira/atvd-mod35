@@ -2,25 +2,27 @@ import Food from '../../models/Food'
 import Product from '../Product'
 import { List } from './styles'
 
-type Props = {
+export type Props = {
   itens: Food[]
+  type: 'produto' | 'restaurante'
+  onOpenModal?: (item: Food) => void
 }
 
-const ProductsList = ({ itens }: Props) => (
-  <div className="container">
-    <List>
-      {itens.map((i) => (
-        <Product
-          key={i.id}
-          title={i.title}
-          image={i.image}
-          description={i.description}
-          infos={i.infos}
-          grade={i.grade}
-        />
-      ))}
-    </List>
-  </div>
-)
+const ProductsList = ({ itens, type, onOpenModal }: Props) => {
+  return (
+    <div className="container">
+      <List type={type}>
+        {itens.map((i) => (
+          <Product
+            key={i.id}
+            item={i}
+            type={type}
+            onOpenModal={() => onOpenModal && onOpenModal(i)}
+          />
+        ))}
+      </List>
+    </div>
+  )
+}
 
 export default ProductsList

@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 import { Card } from '../Product/styles'
 
-export const List = styled.ul`
+import { Props } from '.'
+
+export const List = styled.ul<Omit<Props, 'itens'>>`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 80px;
+  grid-template-columns: ${(props) =>
+    props.type === 'restaurante' ? 'repeat(2,1fr)' : 'repeat(3,1fr)'};
+  column-gap: ${(props) => (props.type === 'restaurante' ? '80px' : '32px')};
   margin-top: 32px;
   margin-bottom: 120px;
 
