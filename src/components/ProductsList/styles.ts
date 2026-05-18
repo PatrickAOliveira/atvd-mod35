@@ -8,7 +8,7 @@ export const List = styled.ul<Omit<Props, 'itens'>>`
   grid-template-columns: ${(props) =>
     props.type === 'restaurante' ? 'repeat(2,1fr)' : 'repeat(3,1fr)'};
   column-gap: ${(props) => (props.type === 'restaurante' ? '80px' : '32px')};
-  margin-top: 32px;
+  margin-top: ${(props) => (props.type === 'restaurante' ? '32px' : '8px')};
   margin-bottom: 120px;
 
   ${Card} {

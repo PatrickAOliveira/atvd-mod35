@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 import { Props } from '.'
 
-export const Overlay = styled.div<Omit<Props, 'item'>>`
+export const Overlay = styled.div<Omit<Props, 'item' | 'addToCart'>>`
   position: fixed;
   left: 0;
   top: 0;
@@ -18,10 +18,14 @@ export const Overlay = styled.div<Omit<Props, 'item'>>`
 
 export const ModalBox = styled.div`
   display: flex;
-  width: 1024px;
+  width: 100%;
   background-color: ${cores.rosa};
   color: ${cores.rosaClaro};
   padding: 32px;
+
+  img {
+    object-fit: cover;
+  }
 
   div {
     margin-left: 24px;

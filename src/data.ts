@@ -12,7 +12,8 @@ export const itens: Food[] = [
     description:
       'Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!',
     infos: ['Destaque da semana', 'Japonesa'],
-    grade: '4.9'
+    grade: '4.9',
+    price: 0
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ export const itens: Food[] = [
     description:
       'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
     infos: ['Italiana'],
-    grade: '4.6'
+    grade: '4.6',
+    price: 0
   },
   {
     id: 3,
@@ -30,7 +32,8 @@ export const itens: Food[] = [
     description:
       'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
     infos: ['Italiana'],
-    grade: '4.6'
+    grade: '4.6',
+    price: 0
   },
   {
     id: 4,
@@ -39,7 +42,8 @@ export const itens: Food[] = [
     description:
       'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
     infos: ['Italiana'],
-    grade: '4.6'
+    grade: '4.6',
+    price: 0
   },
   {
     id: 5,
@@ -48,7 +52,8 @@ export const itens: Food[] = [
     description:
       'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
     infos: ['Italiana'],
-    grade: '4.6'
+    grade: '4.6',
+    price: 0
   },
   {
     id: 6,
@@ -57,7 +62,8 @@ export const itens: Food[] = [
     description:
       'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
     infos: ['Italiana'],
-    grade: '4.6'
+    grade: '4.6',
+    price: 0
   }
 ]
 
@@ -69,7 +75,7 @@ export const itens2: Food[] = [
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     infos: [''],
-    grade: ''
+    price: 60.9
   },
   {
     id: 2,
@@ -78,7 +84,7 @@ export const itens2: Food[] = [
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     infos: [''],
-    grade: ''
+    price: 60.9
   },
   {
     id: 3,
@@ -87,7 +93,7 @@ export const itens2: Food[] = [
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     infos: [''],
-    grade: ''
+    price: 60.9
   },
   {
     id: 4,
@@ -96,7 +102,7 @@ export const itens2: Food[] = [
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     infos: [''],
-    grade: ''
+    price: 60.9
   },
   {
     id: 5,
@@ -105,7 +111,7 @@ export const itens2: Food[] = [
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     infos: [''],
-    grade: ''
+    price: 60.9
   },
   {
     id: 6,
@@ -114,6 +120,6 @@ export const itens2: Food[] = [
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     infos: [''],
-    grade: ''
+    price: 60.9
   }
 ]
