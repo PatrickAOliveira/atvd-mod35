@@ -1,14 +1,15 @@
-import Food from '../../models/Food'
 import { SideBar, SidebarContainer, SideOverlay } from './styles'
 import { useState } from 'react'
 import Cart from '../../containers/Cart'
 import Delivery from '../../containers/Delivery'
 import Payment from '../../containers/Payment'
 import Finish from '../../containers/Finish'
+import { Cardapio } from '../../pages/Home'
+import { formataPreco } from '../Modal'
 
 type Props = {
   isOpen: boolean
-  items: Food[]
+  items: Cardapio[]
   closeCart: () => void
   removeItem: (index: number) => void
 }
@@ -17,7 +18,7 @@ const Sidebar = ({ isOpen, items, closeCart, removeItem }: Props) => {
   const [step, setStep] = useState<'cart' | 'delivery' | 'payment' | 'finish'>(
     'cart'
   )
-  const subtotal = items.reduce((acc, curr) => acc + curr.price, 0).toFixed(2)
+  const subtotal = items.reduce((acc, curr) => acc + curr.preco, 0)
 
   const handleClose = () => {
     closeCart()
@@ -49,7 +50,7 @@ const Sidebar = ({ isOpen, items, closeCart, removeItem }: Props) => {
         )}
         {step === 'payment' && (
           <Payment
-            subtotal={subtotal}
+            subtotal={formataPreco(subtotal)}
             onFinish={() => setStep('finish')}
             onBack={() => setStep('delivery')}
           />

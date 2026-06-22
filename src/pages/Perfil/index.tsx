@@ -1,28 +1,38 @@
 import { useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { itens2 } from '../../data'
 import Banner from '../../components/Banner'
 import Header from '../../components/Header'
 import ProductsList from '../../components/ProductsList'
-import Food from '../../models/Food'
 import Modal from '../../components/Modal'
 import Sidebar from '../../components/Sidebar'
+import { Cardapio, Food } from '../Home'
 
 const Perfil = () => {
   const { id } = useParams()
 
   const [modalOpen, setModalOpen] = useState(false)
   const [cartOpen, setCartOpen] = useState(false)
-  const [itemSelected, setItemSelected] = useState<Food | null>(null)
-  const [itemsOnCart, setItemsOnCart] = useState<Food[]>([])
+  const [itemSelected, setItemSelected] = useState<Cardapio>()
+  const [itemsOnCart, setItemsOnCart] = useState<Cardapio[]>([])
+  const [cardapio, setCardapio] = useState<Cardapio[]>([])
 
-  const openModal = (item: Food) => {
+  useEffect(() => {
+    fetch(`https://api-ebac.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((res: Food) => {
+        if (res && res.cardapio) {
+          setCardapio(res.cardapio)
+        }
+      })
+  }, [id])
+
+  const openModal = (item: Cardapio) => {
     setItemSelected(item)
     setModalOpen(true)
   }
 
-  const addToCart = (item: Food) => {
+  const addToCart = (item: Cardapio) => {
     setItemsOnCart([...itemsOnCart, item])
     setModalOpen(false)
     setCartOpen(true)
@@ -32,17 +42,23 @@ const Perfil = () => {
     setItemsOnCart(itemsOnCart.filter((_, index) => index !== indexToRemove))
   }
 
+  if (!cardapio) {
+    return <h3>Carregando...</h3>
+  }
+
   return (
     <>
       <Header />
       <Banner id={Number(id)} />
-      <ProductsList itens={itens2} type="produto" onOpenModal={openModal} />
-      <Modal
-        isOpen={modalOpen}
-        item={itemSelected}
-        closeModal={() => setModalOpen(false)}
-        addToCart={() => itemSelected && addToCart(itemSelected)}
-      />
+      <ProductsList itens={cardapio} type="cardapio" onOpenModal={openModal} />
+      {itemSelected && (
+        <Modal
+          isOpen={modalOpen}
+          item={itemSelected}
+          closeModal={() => setModalOpen(false)}
+          addToCart={() => itemSelected && addToCart(itemSelected)}
+        />
+      )}
       <Sidebar
         isOpen={cartOpen}
         items={itemsOnCart}

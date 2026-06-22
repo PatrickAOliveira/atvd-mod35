@@ -18,7 +18,7 @@ type Props = {
 
 const Payment = ({ onBack, onFinish, subtotal }: Props) => (
   <Container>
-    <FormTitulo>Pagamento - Valor a pagar R${subtotal}</FormTitulo>
+    <FormTitulo>Pagamento - Valor a pagar {subtotal}</FormTitulo>
     <FormContainer>
       <FormItem>
         <Rotulo htmlFor="nome-cartao">Nome no cartão</Rotulo>

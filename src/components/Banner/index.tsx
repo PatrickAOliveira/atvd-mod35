@@ -1,31 +1,30 @@
-import { BannerImg, TagItem, TitleItem } from './styles'
+import { useEffect, useState } from 'react'
 
-import macarrao from '../../assets/images/macarrao.png'
-import sushi from '../../assets/images/sushi.png'
-import { itens } from '../../data'
+import { BannerImg, TagItem, TitleItem } from './styles'
+import { Food } from '../../pages/Home'
+import { getFoodInfos } from '../Product'
 
 type Props = {
   id: number
 }
 
 const Banner = ({ id }: Props) => {
-  const item = itens.find((i) => i.id === id)
+  const [food, setFood] = useState<Food>()
 
-  if (id === 1) {
-    return (
-      <BannerImg style={{ backgroundImage: `url(${sushi})` }}>
-        <div className="container">
-          <TagItem>{item?.infos.at(-1)}</TagItem>
-          <TitleItem>{item?.title}</TitleItem>
-        </div>
-      </BannerImg>
-    )
+  useEffect(() => {
+    fetch(`https://api-ebac.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((res: Food) => setFood(res))
+  }, [id])
+
+  if (!food) {
+    return <h3>Carregando...</h3>
   }
   return (
-    <BannerImg style={{ backgroundImage: `url(${macarrao})` }}>
+    <BannerImg style={{ backgroundImage: `url(${food.capa})` }}>
       <div className="container">
-        <TagItem>{item?.infos.at(-1)}</TagItem>
-        <TitleItem>{item?.title}</TitleItem>
+        <TagItem>{getFoodInfos(food).at(-1)}</TagItem>
+        <TitleItem>{food.titulo}</TitleItem>
       </div>
     </BannerImg>
   )

@@ -25,6 +25,8 @@ export const ModalBox = styled.div`
 
   img {
     object-fit: cover;
+    width: 280px;
+    height: 280px;
   }
 
   div {

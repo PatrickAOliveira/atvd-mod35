@@ -1,11 +1,11 @@
-import Food from '../../models/Food'
+import { Cardapio, Food } from '../../pages/Home'
 import Product from '../Product'
 import { List } from './styles'
 
 export type Props = {
-  itens: Food[]
-  type: 'produto' | 'restaurante'
-  onOpenModal?: (item: Food) => void
+  itens: Food[] | Cardapio[]
+  type: 'cardapio' | 'restaurante'
+  onOpenModal?: (item: Cardapio) => void
 }
 
 const ProductsList = ({ itens, type, onOpenModal }: Props) => {
@@ -17,7 +17,11 @@ const ProductsList = ({ itens, type, onOpenModal }: Props) => {
             key={i.id}
             item={i}
             type={type}
-            onOpenModal={() => onOpenModal && onOpenModal(i)}
+            onOpenModal={() => {
+              if (type === 'cardapio' && onOpenModal) {
+                onOpenModal(i as Cardapio)
+              }
+            }}
           />
         ))}
       </List>

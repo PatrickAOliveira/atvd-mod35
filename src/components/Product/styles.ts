@@ -6,19 +6,26 @@ import { Props } from '.'
 
 export const Card = styled.div<Omit<Props, 'item' | 'onOpenModal'>>`
   color: ${(props) =>
-    props.type === 'produto' ? cores.rosaClaro : cores.rosa};
-  background-color: ${(props) => (props.type === 'produto' ? cores.rosa : '')};
+    props.type === 'cardapio' ? cores.rosaClaro : cores.rosa};
+  background-color: ${(props) => (props.type === 'cardapio' ? cores.rosa : '')};
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: ${(props) => (props.type === 'produto' ? '8px' : 0)};
+  padding: ${(props) => (props.type === 'cardapio' ? '8px' : 0)};
 
   ${TagContainer} {
     margin-right: 8px;
   }
 
   div {
-    padding-top: ${(props) => (props.type === 'produto' ? '8px' : 'auto')};
+    padding-top: ${(props) => (props.type === 'cardapio' ? '8px' : 'auto')};
+  }
+
+  > img {
+    max-width: 472px;
+    width: 100%;
+    height: 217px;
+    object-fit: cover;
   }
 `
 

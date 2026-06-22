@@ -2,34 +2,60 @@ import { Card, CardDetails, Descricao, Infos, Nota, Titulo } from './styles'
 import estrela from '../../assets/images/estrela.png'
 import Tag from '../Tag'
 import Button from '../Button'
-import Food from '../../models/Food'
+import { Cardapio, Food } from '../../pages/Home'
 
 export type Props = {
-  item: Food
-  type: 'produto' | 'restaurante'
+  item: Food | Cardapio
+  type: 'cardapio' | 'restaurante'
   onOpenModal?: () => void
+}
+
+const getDescricao = (descricao: string) => {
+  if (descricao.length > 263) {
+    return descricao.slice(0, 260) + '...'
+  }
+  return descricao
+}
+
+export const getFoodInfos = (food: Food) => {
+  const tags = []
+
+  if (food.destacado) {
+    tags.push('Destaque do Dia')
+  }
+  if (food.tipo) {
+    tags.push(food.tipo)
+  }
+
+  return tags
 }
 
 const Product = ({ item, type, onOpenModal }: Props) => {
   if (type === 'restaurante') {
+    const restauranteApi = item as Food
+
     return (
       <Card type={type}>
-        <img src={item.image} alt={item.title} />
+        <img src={restauranteApi.capa} alt={restauranteApi.titulo} />
         <Infos>
-          {item.infos.map((info) => (
+          {getFoodInfos(restauranteApi).map((info) => (
             <Tag key={info}>{info}</Tag>
           ))}
         </Infos>
         <CardDetails>
           <div>
-            <Titulo>{item.title}</Titulo>
+            <Titulo>{restauranteApi.titulo}</Titulo>
             <Nota>
-              <Titulo>{item.grade}</Titulo>
+              <Titulo>{restauranteApi.avaliacao}</Titulo>
               <img src={estrela} alt="Estrela" />
             </Nota>
           </div>
-          <Descricao>{item.description}</Descricao>
-          <Button type="link" to={`/perfil/${item.id}`} title="Saiba mais">
+          <Descricao>{getDescricao(restauranteApi.descricao)}</Descricao>
+          <Button
+            type="link"
+            to={`/perfil/${restauranteApi.id}`}
+            title="Saiba mais"
+          >
             Saiba mais
           </Button>
         </CardDetails>
@@ -37,13 +63,15 @@ const Product = ({ item, type, onOpenModal }: Props) => {
     )
   }
 
+  const cardapioApi = item as Cardapio
+
   return (
     <>
       <Card type={type}>
-        <img src={item.image} alt={item.title} />
+        <img src={cardapioApi.foto} alt={cardapioApi.nome} />
         <div>
-          <Titulo>{item.title}</Titulo>
-          <Descricao>{item.description}</Descricao>
+          <Titulo>{cardapioApi.nome}</Titulo>
+          <Descricao>{getDescricao(cardapioApi.descricao)}</Descricao>
         </div>
         <Button
           type="button"
