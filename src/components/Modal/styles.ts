@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import { Props } from '.'
 
-export const Overlay = styled.div<Omit<Props, 'item' | 'addToCart'>>`
+export const Overlay = styled.div`
   position: fixed;
   left: 0;
   top: 0;
@@ -13,7 +12,11 @@ export const Overlay = styled.div<Omit<Props, 'item' | 'addToCart'>>`
   justify-content: center;
   align-items: center;
   overflow-y: auto;
-  display: ${(props) => (props.isOpen === false ? 'none' : 'flex')};
+  display: none;
+
+  &.is-open {
+    display: flex;
+  }
 `
 
 export const ModalBox = styled.div`

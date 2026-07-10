@@ -10,6 +10,7 @@ export const HeaderBar = styled.header`
     color: ${cores.rosa};
     text-decoration: none;
     font-weight: bold;
+    cursor: pointer;
   }
 `
 

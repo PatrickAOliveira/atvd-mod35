@@ -1,30 +1,23 @@
-import { useEffect, useState } from 'react'
-
 import { BannerImg, TagItem, TitleItem } from './styles'
-import { Food } from '../../pages/Home'
+
 import { getFoodInfos } from '../Product'
+import { useGetCardapiosQuery } from '../../services/api'
 
 type Props = {
-  id: number
+  id: string
 }
 
 const Banner = ({ id }: Props) => {
-  const [food, setFood] = useState<Food>()
+  const { data: restaurante } = useGetCardapiosQuery(id)
 
-  useEffect(() => {
-    fetch(`https://api-ebac.vercel.app/api/efood/restaurantes/${id}`)
-      .then((res) => res.json())
-      .then((res: Food) => setFood(res))
-  }, [id])
-
-  if (!food) {
+  if (!restaurante) {
     return <h3>Carregando...</h3>
   }
   return (
-    <BannerImg style={{ backgroundImage: `url(${food.capa})` }}>
+    <BannerImg style={{ backgroundImage: `url(${restaurante.capa})` }}>
       <div className="container">
-        <TagItem>{getFoodInfos(food).at(-1)}</TagItem>
-        <TitleItem>{food.titulo}</TitleItem>
+        <TagItem>{getFoodInfos(restaurante).at(-1)}</TagItem>
+        <TitleItem>{restaurante.titulo}</TitleItem>
       </div>
     </BannerImg>
   )

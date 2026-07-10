@@ -1,42 +1,35 @@
+import { useDispatch, useSelector } from 'react-redux'
 import { SideBar, SidebarContainer, SideOverlay } from './styles'
-import { useState } from 'react'
 import Cart from '../../containers/Cart'
 import Delivery from '../../containers/Delivery'
 import Payment from '../../containers/Payment'
 import Finish from '../../containers/Finish'
-import { Cardapio } from '../../pages/Home'
 import { formataPreco } from '../Modal'
+import { RootReducer } from '../../store'
+import { close, setContainer } from '../../store/reducers/cart'
 
-type Props = {
-  isOpen: boolean
-  items: Cardapio[]
-  closeCart: () => void
-  removeItem: (index: number) => void
-}
+export type Container = 'cart' | 'delivery' | 'payment' | 'finish'
 
-const Sidebar = ({ isOpen, items, closeCart, removeItem }: Props) => {
-  const [step, setStep] = useState<'cart' | 'delivery' | 'payment' | 'finish'>(
-    'cart'
+const Sidebar = () => {
+  const { isOpen, items, step } = useSelector(
+    (state: RootReducer) => state.cart
   )
+  const dispatch = useDispatch()
   const subtotal = items.reduce((acc, curr) => acc + curr.preco, 0)
 
   const handleClose = () => {
-    closeCart()
-    setTimeout(() => setStep('cart'), 300)
+    dispatch(close())
+    setTimeout(() => dispatch(setContainer('cart')), 300)
   }
 
   return (
-    <SidebarContainer isOpen={isOpen}>
+    <SidebarContainer className={isOpen ? 'is-open' : ''}>
       <SideOverlay onClick={handleClose} />
-      <SideBar>
+      <SideBar onClick={(e) => e.stopPropagation()}>
         {step === 'cart' && (
           <>
             {items.length > 0 ? (
-              <Cart
-                items={items}
-                removeItem={removeItem}
-                nextStep={() => setStep('delivery')}
-              />
+              <Cart nextStep={() => dispatch(setContainer('delivery'))} />
             ) : (
               <p>O carrinho está vazio</p>
             )}
@@ -44,15 +37,15 @@ const Sidebar = ({ isOpen, items, closeCart, removeItem }: Props) => {
         )}
         {step === 'delivery' && (
           <Delivery
-            nextStep={() => setStep('payment')}
-            onBack={() => setStep('cart')}
+            nextStep={() => dispatch(setContainer('payment'))}
+            onBack={() => dispatch(setContainer('cart'))}
           />
         )}
         {step === 'payment' && (
           <Payment
             subtotal={formataPreco(subtotal)}
-            onFinish={() => setStep('finish')}
-            onBack={() => setStep('delivery')}
+            onFinish={() => dispatch(setContainer('finish'))}
+            onBack={() => dispatch(setContainer('delivery'))}
           />
         )}
         {step === 'finish' && <Finish />}

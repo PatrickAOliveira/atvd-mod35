@@ -2,10 +2,10 @@ import { Card, CardDetails, Descricao, Infos, Nota, Titulo } from './styles'
 import estrela from '../../assets/images/estrela.png'
 import Tag from '../Tag'
 import Button from '../Button'
-import { Cardapio, Food } from '../../pages/Home'
+import { Cardapio, Restaurante } from '../../pages/Home'
 
 export type Props = {
-  item: Food | Cardapio
+  item: Restaurante | Cardapio
   type: 'cardapio' | 'restaurante'
   onOpenModal?: () => void
 }
@@ -17,7 +17,7 @@ const getDescricao = (descricao: string) => {
   return descricao
 }
 
-export const getFoodInfos = (food: Food) => {
+export const getFoodInfos = (food: Restaurante) => {
   const tags = []
 
   if (food.destacado) {
@@ -32,7 +32,7 @@ export const getFoodInfos = (food: Food) => {
 
 const Product = ({ item, type, onOpenModal }: Props) => {
   if (type === 'restaurante') {
-    const restauranteApi = item as Food
+    const restauranteApi = item as Restaurante
 
     return (
       <Card type={type}>

@@ -1,18 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '../../components/Button'
 import { Titulo } from '../../components/Product/styles'
 import { Descricao } from '../../components/Product/styles'
 import { CartContainer, CartItem, ImgItem, TotalContainer } from './styles'
 import lixeira from '../../assets/images/lixeira.png'
-import { Cardapio } from '../../pages/Home'
 import { formataPreco } from '../../components/Modal'
+import { RootReducer } from '../../store'
+import { remove } from '../../store/reducers/cart'
 
 type Props = {
-  items: Cardapio[]
-  removeItem: (index: number) => void
   nextStep: () => void
 }
 
-const Cart = ({ items, removeItem, nextStep }: Props) => {
+const Cart = ({ nextStep }: Props) => {
+  const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
   const subtotal = items.reduce((acc, curr) => acc + curr.preco, 0)
 
   return (
@@ -25,7 +27,7 @@ const Cart = ({ items, removeItem, nextStep }: Props) => {
               <Titulo>{i.nome}</Titulo>
               <Descricao>{formataPreco(i.preco)}</Descricao>
             </div>
-            <a title="Remover" onClick={() => removeItem(index)}>
+            <a title="Remover" onClick={() => dispatch(remove(index))}>
               <img src={lixeira} alt="Lixeira" />
             </a>
           </CartItem>

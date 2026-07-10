@@ -1,9 +1,9 @@
-import { Cardapio, Food } from '../../pages/Home'
+import { Cardapio, Restaurante } from '../../pages/Home'
 import Product from '../Product'
 import { List } from './styles'
 
 export type Props = {
-  itens: Food[] | Cardapio[]
+  itens: Restaurante[] | Cardapio[]
   type: 'cardapio' | 'restaurante'
   onOpenModal?: (item: Cardapio) => void
 }
